@@ -47,4 +47,21 @@ const getArtistsTopTracks = async (id) => {
   }
 }
 
-export {getUserFollowedArtists, getArtist, getArtistsTopTracks}
+const getArtistsAlbums = async (id, limit, offset) => {
+  const accessToken = await AsyncStorage.getItem('token');
+  const country = await AsyncStorage.getItem('country');
+  try {
+    const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums?market=${country}&limit=${limit}&offset=${offset}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch(err) {
+    console.log(err)
+  } 
+}
+
+export {getUserFollowedArtists, getArtist, getArtistsTopTracks, getArtistsAlbums}

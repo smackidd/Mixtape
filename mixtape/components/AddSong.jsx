@@ -1,16 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-import { GetArtistSeparator } from '../helpers/ArtistSeparator';
-import { formatDuration } from '../helpers/SongDurationFormat';
 
-const Song = (props) => {
-  const navigation = useNavigation();
-  const { song } = props;
-  const allArtists = GetArtistSeparator(song.artists);
-  const duration = formatDuration(song.duration);
+
+const AddSong = () => {
+  const navigation = useNavigation(); 
   const [fontsLoaded] = useFonts({
     'LoveYa': require('../assets/fonts/LoveYaLikeASister-Regular.ttf'),
   });
@@ -23,28 +19,21 @@ const Song = (props) => {
     navigation.navigate("SpotifyBrowse");
   }
 
-  
-
   return (
-    <>
-    {/* {song.id ?? ( */}
-      <View style={styles.container}>
-        <View style={styles.songInfo}>
-        
-            <Text style={[styles.songText, { fontFamily: "LoveYa" }]}> {song?.name} - {allArtists} </Text>
-          
-        </View>
-        <View style={styles.songTime}>
-            <Text style={[styles.songText, { fontFamily: "LoveYa" }]}>{duration}</Text>
-        </View>
+    <View style={styles.container}>
+      <View style={styles.songInfo}>
+        <Text style={[styles.songText, { fontFamily: "LoveYa" }]}>Add New Song</Text>
       </View>
-   {/*)}*/}
-    
-    </>
+      <View style={styles.songTime}>
+        <TouchableOpacity style={{flex: 1, justifyContent: "center"}} onPress={() => addSong()}>
+          <MaterialCommunityIcons name="plus-box" color="#111" size={26} />
+        </TouchableOpacity>
+      </View>
+  </View>
   )
 }
 
-export default Song
+export default AddSong
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +59,6 @@ const styles = StyleSheet.create({
   },
   songText: {
     fontSize: 20,
-    //color: 'rgba(2, 75, 191, 0.9 )'
-    color: 'rgba(0,0,0,0.5)'
+    color: 'rgba(2, 75, 191, 0.9 )'
   },
 })

@@ -21,7 +21,6 @@ import Artist from './app/screens/Artist';
 const Stack = createNativeStackNavigator();
 
 const InsideStack = createNativeStackNavigator();
-const SpotifyStack = createNativeStackNavigator();
 
 
 function InsideLayout() {
@@ -33,6 +32,7 @@ function InsideLayout() {
   )  
 }
 
+const SpotifyStack = createNativeStackNavigator();
 function SpotifySearchLayout() {
   return (
     <SpotifyStack.Navigator screenOptions={{ headerShown: false }}>

@@ -1,9 +1,11 @@
 import { FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { getArtist, getArtistsTopTracks } from '../../api_calls/Artists';
+import { getArtist, getArtistsAlbums, getArtistsTopTracks } from '../../api_calls/Artists';
 import BrowseHeader from '../../components/BrowseHeader';
 import { useNavigation, Link } from '@react-navigation/native';
 import SpotifySong from '../../components/SpotifySong';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import SpotifyAlbum from '../../components/SpotifyAlbum';
 
 
 const Artist = ({route}) => {
@@ -11,7 +13,8 @@ const Artist = ({route}) => {
   const { id } = params;
   const navigation = useNavigation();
   const [artist, setArtist] = useState([]);
-  const [artistsTopTracks, setArtistsTopTracks] = useState([])
+  const [artistsTopTracks, setArtistsTopTracks] = useState([]);
+  const [artistsTopAlbums, setArtistsTopAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   
 
@@ -23,9 +26,13 @@ const Artist = ({route}) => {
     try {
       const artist = await getArtist(id);
       const topTracks = await getArtistsTopTracks(id);
+      const albumLimit = 5;
+      const albumOffset = 0;
+      const topAlbums = await getArtistsAlbums(id, albumLimit, albumOffset)
       console.log(topTracks);
       setArtist(artist);
       setArtistsTopTracks(topTracks);
+      setArtistsTopAlbums(topAlbums);
     } catch (err) {
       console.log(err.message);
     } finally {
@@ -33,17 +40,22 @@ const Artist = ({route}) => {
     }
   }
 
-  const addSong = () => {
-    console.log("addSong")
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Create' }]
-    });
-  }
+
+
+  // const addSong = async (song) => {
+  //   console.log("addSong", song.name)
+  //   await AsyncStorage.setItem('SpotifySongName', song.name)
+  // }
 
   useEffect(() => {
     artistData();
   }, [])
+
+  const getAlbum = (id) => {
+    navigation.navigate("Album", {
+      id
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -63,12 +75,30 @@ const Artist = ({route}) => {
               data={artistsTopTracks.tracks}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={addSong}>
+                <TouchableOpacity onPress={() => {
+                  //navigation.setParams({selectedSong: item})
+                  navigation.navigate("Create", { selectedSong: item });
+                     
+                  }
+                }>
                     <SpotifySong song={item} />  
                 </TouchableOpacity>
               )}
             />
+            <Text style={styles.songListHeader}>Latest Releases</Text>
+              <FlatList 
+                data={artistsTopAlbums.items}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                  <TouchableOpacity onPress={() => {getAlbum(item.id)}
+                  }>
+                      <SpotifyAlbum song={item} />  
+                  </TouchableOpacity>
+                )}
+              />
           </View>
+
+          
         </ScrollView>
       )}
     </View>
