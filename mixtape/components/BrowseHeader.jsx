@@ -11,13 +11,13 @@ const BrowseHeader = (props) => {
         
           <TouchableOpacity onPress={() => closeScreen()}>
           {headerName === "Explore" ? (
-            <Text style={styles.closeText}>Close</Text>
+            <Text style={styles.closeText} >Close</Text>
           ) : (
             <MaterialCommunityIcons name="chevron-left" color="#fff" size={30} />
           )}
           </TouchableOpacity>
         
-        <Text style={styles.headerText}>{headerName}</Text>
+        <Text style={styles.headerText} numberOfLines={1} ellipsizeMode='tail'>{headerName}</Text>
         <Text style={styles.endText}>     </Text>
 
       </View>
@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
     color: '#fff',
    
     fontSize: 26,
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '70%'
+
   },
   
   closeText: {
     color: '#fff',
     fontSize: 22,
-    
   },
   endText: {
     marginRight: 50

@@ -6,4 +6,9 @@ function GetArtistSeparator(artists) {
     return artistNames.join(', ');    
 }
 
-export {GetArtistSeparator};
+function GetQueryArtistSeparator(artist) {
+    const artistName = artist.replace(' ', '%20');
+    return artistName
+}
+
+export {GetArtistSeparator, GetQueryArtistSeparator};

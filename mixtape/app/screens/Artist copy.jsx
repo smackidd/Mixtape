@@ -1,4 +1,4 @@
-import { Button, FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getArtist, getArtistsAlbums, getArtistsTopTracks } from '../../api_calls/Artists';
 import BrowseHeader from '../../components/BrowseHeader';
@@ -19,7 +19,6 @@ const Artist = ({route}) => {
   const [artistsTopAlbums, setArtistsTopAlbums] = useState([]);
   const [artistsPlaylists, setArtistsPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [scrollEnabled, setScrollEnabled] = useState(true);
   
 
   const previousScreen = () => {
@@ -63,21 +62,6 @@ const Artist = ({route}) => {
     });
   }
 
-  const getPlaylist = (id) => {
-    navigation.navigate("SpotifyPlaylistTracks", {
-      id
-    });
-  }
-
-  handleHorizontalScroll = (event) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-    if (offsetY !== 0) {
-      setScrollEnabled(false);
-    } else {
-      setScrollEnabled(true);
-    }  
-  }
-
   return (
     <View style={styles.container}>
       {loading ? (
@@ -91,42 +75,50 @@ const Artist = ({route}) => {
               <Text style={styles.artistHeader}>{artist.name}</Text>
             </View>
           </ImageBackground>
-          <ScrollView scrollEnabled={scrollEnabled} style={styles.scrollView}>
-            <View style={styles.songList}>
-              <Text style={styles.songListHeader}>Popular Songs</Text>
-              {artistsTopTracks.tracks.map((item, index) => (
-                <TouchableOpacity key={index} onPress={() => {
+            <ScrollView style={styles.scrollView}>
+          <View style={styles.songList}>
+            <Text style={styles.songListHeader}>Popular Songs</Text>
+            <FlatList 
+              data={artistsTopTracks.tracks}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => {
                   //navigation.setParams({selectedSong: item})
                   navigation.navigate("Create", { selectedSong: item });
-                    
+                     
                   }
                 }>
                     <SpotifySong song={item} />  
-                </TouchableOpacity>  
-              ))}
-              <Text style={styles.songListHeader}>Latest Releases</Text>
-              {artistsTopAlbums.items.map((item, index) => (
-                <TouchableOpacity key={index} onPress={() => {getAlbum(item.id)}}>
-                    <SpotifyAlbum album={item} />  
-                </TouchableOpacity>  
-              ))}
-              <View style={styles.discographyButton}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SpotifyArtistAlbums", {artistId: artist.id})}>
-                  <Text style={styles.buttonText}>See discography</Text>
                 </TouchableOpacity>
-              </View>
-              <Text style={styles.songListHeader}>Related Playlists</Text>
-              <ScrollView horizontal onScroll={handleHorizontalScroll}>
-                {artistsPlaylists.playlists.items.map((item, index) => (
-                  <TouchableOpacity key={index} onPress={() => {getPlaylist(item.id)}}>
-                      <SpotifyPlaylist playlist={item} />  
-                  </TouchableOpacity>  
-                ))}
-              </ScrollView>
-            </View>
+              )}
+            />
+            <Text style={styles.songListHeader}>Latest Releases</Text>
+            <FlatList 
+              data={artistsTopAlbums.items}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => {getAlbum(item.id)}
+                }>
+                    <SpotifyAlbum album={item} />  
+                </TouchableOpacity>
+              )}
+            />
+            <Text style={styles.songListHeader}>Related Playlists</Text>
+            <FlatList 
+              horizontal
+              data={artistsPlaylists.playlists.items}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => {getAlbum(item.id)}
+                }>
+                    <SpotifyPlaylist playlist={item} />  
+                </TouchableOpacity>
+              )}
+            />
+          </View>
 
-            
-          </ScrollView>
+          
+        </ScrollView>
         </>
       )}
     </View>
@@ -169,24 +161,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginTop: 30,
     marginBottom: 10
-  }, 
-  discographyButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 5
-  },
-  button: {
-    backgroundColor: '#000',
-    paddingVertical: 8,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#fff'
-  },
-  buttonText: {
-    fontSize: 12,
-    color: '#fff',
-    textAlign: 'center',
-  },
+  }
 })

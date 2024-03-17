@@ -4,7 +4,7 @@ import { formatDuration } from '../helpers/SongDurationFormat';
 
 const SpotifySong = (props) => {
   const {song} = props;
-
+  console.log("Song", song);
   const artistsNames = (artists) => {
     if (!artists || artists.length === 0) {
       return '';
@@ -19,13 +19,15 @@ const SpotifySong = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image source={song.album.images[song.album.images.length -1]} style={styles.albumImage}/>
+      {song.album && (
+        <Image source={song.album.images[song.album.images.length -1]} style={styles.albumImage}/>
+      )}
       <View style={styles.songNameTimeContainer}>
         <View style={styles.songArtistNameContainer}>
           <View style={styles.songNameContainer}>
             <Text style={styles.songName}>{song.name}</Text>
           </View>
-          {/* <Text style={styles.artistName}>{artistsNames(song.artists)}</Text> */}
+          <Text style={styles.artistName} numberOfLines={1} ellipsizeMode="tail">{artistsNames(song.artists)}</Text>
         </View>
         <View>
           <Text style={styles.timeText}>{formatDuration(song.duration_ms)}</Text>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 5,
+    //margin: 5,
   },
   songArtistNameContainer: {
     justifyContent: 'center',
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     
   }, 
   songName: {
-    fontSize: 15,
+    fontSize: 17,
     color: '#fff'
   },
   artistName: {

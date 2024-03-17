@@ -27,7 +27,6 @@ const Song = (props) => {
 
   return (
     <>
-    {/* {song.id ?? ( */}
       <View style={styles.container}>
         <View style={styles.songInfo}>
         
@@ -38,7 +37,6 @@ const Song = (props) => {
             <Text style={[styles.songText, { fontFamily: "LoveYa" }]}>{duration}</Text>
         </View>
       </View>
-   {/*)}*/}
     
     </>
   )
