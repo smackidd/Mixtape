@@ -63,9 +63,11 @@ const Artist = ({route}) => {
     });
   }
 
-  const getPlaylist = (id) => {
+  const getPlaylist = (id, name, image) => {
     navigation.navigate("SpotifyPlaylistTracks", {
-      id
+      id,
+      playlistName: name,
+      playlistImage: image
     });
   }
 
@@ -118,7 +120,7 @@ const Artist = ({route}) => {
               <Text style={styles.songListHeader}>Related Playlists</Text>
               <ScrollView horizontal onScroll={handleHorizontalScroll}>
                 {artistsPlaylists.playlists.items.map((item, index) => (
-                  <TouchableOpacity key={index} onPress={() => {getPlaylist(item.id)}}>
+                  <TouchableOpacity key={index} onPress={() => {getPlaylist(item.id, item.name, item.images[0])}}>
                       <SpotifyPlaylist playlist={item} />  
                   </TouchableOpacity>  
                 ))}
