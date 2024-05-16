@@ -37,4 +37,21 @@ const getArtistsPlaylists = async (artist, limit=10, offset=0) => {
     } 
   }
 
-export {getArtistsPlaylists, getPlaylistItems};
+  const getUsersPlaylists = async (limit=20, offset=0) => {
+    const accessToken = await AsyncStorage.getItem('token');
+    const country = await AsyncStorage.getItem('country');
+    try {
+      const response = await fetch(`https://api.spotify.com/v1/me/playlists?limit=${limit}&offset=${offset}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+      const data = await response.json();
+      console.log("getUserPlaylists", data.items);
+      return data;
+    } catch(err) {
+      console.log(err)
+    } 
+  }
+
+export {getArtistsPlaylists, getPlaylistItems, getUsersPlaylists};

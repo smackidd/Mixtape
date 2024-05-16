@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    //margin: 5,
+    marginLeft: 5,
   },
   songArtistNameContainer: {
     justifyContent: 'center',

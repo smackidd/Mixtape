@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native'
 import React from 'react'
 import theme from '../styles/theme.style.js';
 import tapeColor from '../helpers/TapeColor.js';

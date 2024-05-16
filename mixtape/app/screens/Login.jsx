@@ -1,4 +1,4 @@
-import { ActivityIndicator, Button, ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Button, ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -96,17 +96,17 @@ const styles = StyleSheet.create({
         height: 50,
         borderWidth: 1,
         //borderRadius: 2,
-        ...Platform.select({
-            ios: {
-              shadowColor: 'black',
-              shadowOffset: { width: 5, height: 10 },
-              shadowRadius: 5,
-              shadowOpacity: 0.25,
-            },
-            android: {
-              elevation: 4, // Elevation is equivalent to shadow for Android
-            },
-        }),
+        // ...Platform.select({
+        //     ios: {
+        //       shadowColor: 'black',
+        //       shadowOffset: { width: 5, height: 10 },
+        //       shadowRadius: 5,
+        //       shadowOpacity: 0.25,
+        //     },
+        //     android: {
+        //       elevation: 4, // Elevation is equivalent to shadow for Android
+        //     },
+        // }),
         padding: 10,
         borderRadius: 10,
         color: "#fccccd",
@@ -130,17 +130,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#99f0d1', // Set the background color
-        ...Platform.select({
-            ios: {
-              shadowColor: 'black',
-              shadowOffset: { width: 5, height: 10 },
-              shadowRadius: 5,
-              shadowOpacity: 0.25,
-            },
-            android: {
-              elevation: 4, // Elevation is equivalent to shadow for Android
-            },
-        }),
+        // ...Platform.select({
+        //     ios: {
+        //       shadowColor: 'black',
+        //       shadowOffset: { width: 5, height: 10 },
+        //       shadowRadius: 5,
+        //       shadowOpacity: 0.25,
+        //     },
+        //     android: {
+        //       elevation: 4, // Elevation is equivalent to shadow for Android
+        //     },
+        // }),
         padding: 10,
         borderRadius: 10,
         marginTop: 10,
@@ -152,17 +152,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#84c2d4', // Set the background color
-        ...Platform.select({
-            ios: {
-              shadowColor: 'black',
-              shadowOffset: { width: 5, height: 10 },
-              shadowRadius: 5,
-              shadowOpacity: 0.25,
-            },
-            android: {
-              elevation: 4, // Elevation is equivalent to shadow for Android
-            },
-        }),
+        // ...Platform.select({
+        //     ios: {
+        //       shadowColor: 'black',
+        //       shadowOffset: { width: 5, height: 10 },
+        //       shadowRadius: 5,
+        //       shadowOpacity: 0.25,
+        //     },
+        //     android: {
+        //       elevation: 4, // Elevation is equivalent to shadow for Android
+        //     },
+        // }),
         padding: 10,
         
         borderRadius: 10,

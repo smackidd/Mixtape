@@ -20,20 +20,15 @@ import Artist from './app/screens/Artist';
 import Album from './app/screens/Album';
 import SpotifyArtistAlbums from './app/screens/SpotifyArtistAlbums';
 import SpotifyPlaylistTracks from './app/screens/SpotifyPlaylistTracks';
+import Albums from './app/screens/Albums';
+import Playlists from './app/screens/Playlists';
 
 const Stack = createNativeStackNavigator();
 
-const InsideStack = createNativeStackNavigator();
+//const InsideStack = createNativeStackNavigator();
 
 
-function InsideLayout() {
-  return (
-    <InsideStack.Navigator>
-      <InsideStack.Screen name="My todos" component={List} />
-      <InsideStack.Screen name="Details" component={Details} />
-    </InsideStack.Navigator>
-  )  
-}
+
 
 const SpotifyStack = createNativeStackNavigator();
 function SpotifySearchLayout() {
@@ -44,6 +39,8 @@ function SpotifySearchLayout() {
       <SpotifyStack.Screen name="Artists" component={Artists} />
       <SpotifyStack.Screen name="Artist" component={Artist} />
       <SpotifyStack.Screen name="Album" component={Album} />
+      <SpotifyStack.Screen name="Albums" component={Albums} />
+      <SpotifyStack.Screen name="Playlists" component={Playlists} />
       <SpotifyStack.Screen name="SpotifyArtistAlbums" component={SpotifyArtistAlbums} />
       <SpotifyStack.Screen name="SpotifyPlaylistTracks" component={SpotifyPlaylistTracks} />
     </SpotifyStack.Navigator>

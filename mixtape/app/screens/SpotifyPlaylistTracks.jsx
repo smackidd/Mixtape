@@ -50,7 +50,7 @@ const SpotifyPlaylistTracks = ({route}) => {
           <BrowseHeader headerName={playlistName} closeScreen={previousScreen} />
           <ScrollView >
             <ImageBackground source={{uri: playlistImage.url}} style={styles.coverArt}></ImageBackground>
-            <View >
+            <View style={styles.header}>
               <Text style={styles.playlistName}>{playlistName}</Text>
             </View>
             <View>
@@ -81,11 +81,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#111',
     //padding: 8,    
   },
+  header: {
+    marginBottom: 20
+  },
   body: {
     paddingLeft: 15,
     paddingRight: 15,
     height: '100%',
-    marginBottom: 100
+    paddingBottom: 100
   },
   coverArt: {
     alignSelf: 'center',
