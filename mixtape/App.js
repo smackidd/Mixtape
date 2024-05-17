@@ -22,6 +22,10 @@ import SpotifyArtistAlbums from './app/screens/SpotifyArtistAlbums';
 import SpotifyPlaylistTracks from './app/screens/SpotifyPlaylistTracks';
 import Albums from './app/screens/Albums';
 import Playlists from './app/screens/Playlists';
+import Moods from './app/screens/Moods';
+import Categories from './app/screens/Categories';
+import Category from './app/screens/Category';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +45,9 @@ function SpotifySearchLayout() {
       <SpotifyStack.Screen name="Album" component={Album} />
       <SpotifyStack.Screen name="Albums" component={Albums} />
       <SpotifyStack.Screen name="Playlists" component={Playlists} />
+      <SpotifyStack.Screen name="Categories" component={Categories} />
+      <SpotifyStack.Screen name="Category" component={Category} />
+      <SpotifyStack.Screen name="Moods" component={Moods} />
       <SpotifyStack.Screen name="SpotifyArtistAlbums" component={SpotifyArtistAlbums} />
       <SpotifyStack.Screen name="SpotifyPlaylistTracks" component={SpotifyPlaylistTracks} />
     </SpotifyStack.Navigator>
