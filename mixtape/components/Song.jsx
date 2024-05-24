@@ -5,6 +5,8 @@ import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { GetArtistSeparator } from '../helpers/ArtistSeparator';
 import { formatDuration } from '../helpers/SongDurationFormat';
+import theme from '../styles/theme.style';
+
 
 const Song = (props) => {
   const navigation = useNavigation();
@@ -50,14 +52,14 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderRadius: 1,
-    borderColor: 'rgba(0,0,0,0.25)'
+    borderColor: theme.CREATE_BORDER
   },
   songInfo: {
     flex: 4,
     paddingVertical: 10,
     paddingLeft: 5,
     borderRightWidth: 1,
-    borderColor: 'rgba(0,0,0,0.25)'
+    borderColor: theme.CREATE_BORDER
   },
   songTime: {
     flex: 1,
@@ -69,6 +71,6 @@ const styles = StyleSheet.create({
   songText: {
     fontSize: 20,
     //color: 'rgba(2, 75, 191, 0.9 )'
-    color: 'rgba(0,0,0,0.5)'
+    color: theme.CREATE_TEXT
   },
 })

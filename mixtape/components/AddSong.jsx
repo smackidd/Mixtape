@@ -3,6 +3,7 @@ import React from 'react'
 import { useFonts } from 'expo-font';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import theme from '../styles/theme.style';
 
 
 const AddSong = () => {
@@ -26,7 +27,7 @@ const AddSong = () => {
       </View>
       <View style={styles.songTime}>
         <TouchableOpacity style={{flex: 1, justifyContent: "center"}} onPress={() => addSong()}>
-          <MaterialCommunityIcons name="plus-box" color="#111" size={26} />
+          <MaterialCommunityIcons name="plus-box" color={theme.TAPE3_BACKGROUND} size={26} />
         </TouchableOpacity>
       </View>
   </View>
@@ -41,14 +42,14 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderRadius: 1,
-    borderColor: 'rgba(0,0,0,0.25)'
+    borderColor: theme.CREATE_BORDER
   },
   songInfo: {
     flex: 4,
     paddingVertical: 10,
     paddingLeft: 5,
     borderRightWidth: 1,
-    borderColor: 'rgba(0,0,0,0.25)'
+    borderColor: theme.CREATE_BORDER
   },
   songTime: {
     flex: 1,
@@ -59,6 +60,6 @@ const styles = StyleSheet.create({
   },
   songText: {
     fontSize: 20,
-    color: 'rgba(2, 75, 191, 0.9 )'
+    color: theme.TAPE3_BACKGROUND
   },
 })

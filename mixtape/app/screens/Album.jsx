@@ -21,6 +21,7 @@ const Album = ({route}) => {
   const albumData = async () => {
     try {
       const album = await getAlbum(id);
+      //console.log("album name", album.name);
       setAlbum(album);
     } catch(err) {
       console.log(err);

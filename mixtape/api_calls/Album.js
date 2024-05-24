@@ -25,7 +25,7 @@ const getUsersSavedAlbums = async (limit=20, offset=0) => {
       }
     })
     const data = await response.json();
-    console.log("Saved Albums", data.items);
+    //console.log("Saved Albums", data.items);
     return data;
   } catch (err) {
       console.log(err.message);

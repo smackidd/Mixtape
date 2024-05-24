@@ -25,7 +25,7 @@ const SpotifyBrowse = () => {
     try {
       const profile = await getProfile();   
       await AsyncStorage.setItem('country', profile.country);
-      const followedArtists = await getUserFollowedArtists();
+      const followedArtists = await getUserFollowedArtists('', 20);
       const savedAlbums = await getUsersSavedAlbums();
       const userPlaylists = await getUsersPlaylists();
       const browseCategories = await getBrowseCategories();
@@ -84,7 +84,6 @@ const SpotifyBrowse = () => {
   }
 
   const getAlbums = () => {
-    console.log("getting albums")
     navigation.navigate("Albums");
   }
 

@@ -83,7 +83,6 @@ const Create = () => {
           keyExtractor={item => item?.id}
           renderItem={({ item }) => (
             <>
-              {console.log("item", item)}
               <Song song={item} />
               
             </>
@@ -112,11 +111,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: 40,
-    borderBottomColor: '#000',
+    borderBottomColor: theme.CREATE_BORDER,
     borderBottomWidth: 2,
   },
   loveYaLikeASister: {
     fontFamily: 'LoveYaLikeASister-Regular',
-    fontSize: 30
+    fontSize: 30, 
+    color: theme.CREATE_TEXT
   }
 })

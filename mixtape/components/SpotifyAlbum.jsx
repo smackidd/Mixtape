@@ -2,7 +2,9 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 const SpotifyAlbum = (props) => {
-  const {album} = props;  
+  const {album, artist} = props;
+  console.log("artist", artist);
+
 
   return (
     <View style={styles.container}>
@@ -11,9 +13,16 @@ const SpotifyAlbum = (props) => {
         <View style={styles.albumNameContainer}>
           <Text style={styles.albumName}>{album.name}</Text>
         </View>
-        <Text style={styles.albumRelease}>{album.release_date}</Text>
+        <View>
+          {artist ? (
+            <Text style={styles.albumRelease}>{artist}</Text>
+          ) : (
+            <Text style={styles.albumRelease}>{album.release_date}</Text>
+          )}
+        </View>
       </View>
     </View>
+
   )
 }
 
